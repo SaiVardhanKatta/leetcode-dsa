@@ -1,0 +1,19 @@
+name: Daily LeetCode Sync
+
+on:
+  workflow_dispatch:   # allows manual trigger
+  schedule:
+    - cron: "30 17 * * *"   # 11:00 PM IST (UTC+5:30)
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sync LeetCode Solutions
+        uses: joshcai/leetcode-sync@v1.8
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          destination-folder: leetcode
